@@ -23,10 +23,10 @@ public class Topic {
                 question0.ok="a";
                 list.add(question0);
                 Question question1=   new Question();
-                question1.title = "Which pulse is faster this one or this one?";
-                question1.ansType="url";
-                question1.a="EXG806BLqQw";
-                question1.b="2ewJbvsAiLI";
+                question1.title = "Which pulse is faster out of these two?";
+                question1.ansType="sound";
+                question1.a="music120bpm";
+                question1.b="music100bpm";
                 question1.ok="a";
                 list.add(question1);
                 Question question2 =   new Question();
@@ -93,7 +93,7 @@ public class Topic {
                 question0.ok="a";
                 list.add(question0);
                 Question question1 =   new Question();
-                question1.title = "HIs this sound high in pitch or low in pitch?";
+                question1.title = "Is this sound high in pitch or low in pitch?";
                 question1.titleUrl = "musict4q2";
                 question1.ansType="text";
                 question1.a="Low";

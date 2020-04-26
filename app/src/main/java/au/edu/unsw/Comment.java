@@ -31,8 +31,6 @@ public class Comment implements Serializable{
         this.id = id;
     }
 
-
-
     public String getContent() {
         return content;
     }

@@ -34,7 +34,7 @@ public class CommentFragment extends Fragment {
     }
 
     @Override
-    // add comment item into the list
+    // add stored items into the list
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerview = view.findViewById(R.id.recyclerview);

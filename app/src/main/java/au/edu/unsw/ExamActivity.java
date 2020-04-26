@@ -114,6 +114,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                             dialog.dismiss();
                             SharedPreferences musicSP = getSharedPreferences("MUSIC", MODE_PRIVATE);
                             SharedPreferences.Editor edit = musicSP.edit();
+                            // local data is changed so visual updates can happen
                             edit.putInt(type+number,1);
                             edit.commit();
                             finish();
@@ -161,7 +162,7 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        // determining the type of question that is either a Text, youtube Link or image
+        // determining the type of question that is either a Text, youtube Link or image, sound
         if (data.ansType.equals("text")){
             tvA.setText("A."+data.a);
             tvB.setText("B."+data.b);
@@ -187,6 +188,11 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
             Drawable drawableB= getResources().getDrawable(imageB);
             drawableB.setBounds(0, 0, drawableB.getMinimumWidth(), drawableB.getMinimumHeight());
             tvB.setCompoundDrawables(null,null,drawableB,null);
+        }else if (data.ansType.equals("sound")){
+            Drawable drawable = getResources().getDrawable(R.drawable.play);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            tvA.setCompoundDrawables(null,null,drawable,null);
+            tvB.setCompoundDrawables(null,null,drawable,null);
         }
 
     }
@@ -229,26 +235,31 @@ public class ExamActivity extends AppCompatActivity implements View.OnClickListe
                     show();
                     return;
                 }
-                // always increases position or question value
+                // always increases position or question value, also changes the button to be invisible so it needs a button press from the next screen
+                // the progress bar is also updated to reflect how many quesitons done
                 position++;
                 btNext.setVisibility(View.INVISIBLE);
                 progress.setProgress(position);
 
                 init();
                 break;
-                //in the cases of url to display the correct data
-            // instead plays the youtube video of the question required
+                //in the cases of url to display the correct data and give the button the method of going into youtube
             case R.id.tv_a:
+
                 if (data.ansType.equals("url")){
                    goToYoutube(data.a);
+                }
+                if (data.ansType.equals("sound")){
+                    playMusic((data.a));
                 }
                 break;
             case R.id.tv_b:
                 if (data.ansType.equals("url")){
                     goToYoutube(data.b);
-
                 }
-
+                if (data.ansType.equals("sound")){
+                    playMusic((data.b));
+                }
                 break;
                 // checks what to set the iv_img to do depending if its music or its a youtube video
             case R.id.iv_img:
